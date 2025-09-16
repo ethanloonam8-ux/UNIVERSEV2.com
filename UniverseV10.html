@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Galaxy Hub</title>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    /* General */
+    body, html {
+      margin: 0;
+      padding: 0;
+      font-family: 'Orbitron', sans-serif;
+      color: #fff;
+      background: black;
+      overflow-x: hidden;
+    }
+
+    /* Star background */
+    canvas#stars {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -1;
+    }
+
+    /* Header */
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px 50px;
+      background: rgba(0,0,0,0.6);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    header h1 {
+      color: #00ffff;
+      font-size: 2rem;
+    }
+
+    nav a {
+      color: #fff;
+      text-decoration: none;
+      margin: 0 15px;
+      font-weight: bold;
+      transition: 0.3s;
+      cursor: pointer;
+    }
+
+    nav a:hover {
+      color: #ff00ff;
+    }
+
+    /* Hero */
+    .hero {
+      text-align: center;
+      padding: 100px 20px;
+      background: radial-gradient(circle at center, #0b0c17, #0f1b33);
+    }
+
+    .hero h2 {
+      font-size: 3rem;
+      color: #00ffff;
+    }
+
+    .hero p {
+      font-size: 1.2rem;
+      margin: 20px 0;
+    }
+
+    .btn {
+      padding: 15px 30px;
+      background: #ff00ff;
+      color: white;
+      font-weight: bold;
+      text-decoration: none;
+      border-radius: 5px;
+      transition: 0.3s;
+      cursor: pointer;
+    }
+
+    .btn:hover {
+      background: #00ffff;
+    }
+
+    /* Tabs */
+    .tabs {
+      display: flex;
+      justify-content: center;
+      margin: 50px 0 20px 0;
+      flex-wrap: wrap;
+    }
+
+    .tab {
+      background: rgba(255,255,255,0.05);
+      margin: 5px;
+      padding: 15px 25px;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    .tab:hover, .tab.active {
+      background: #ff00ff;
+      color: #fff;
+    }
+
+    /* Tab content */
+    .tab-content {
+      display: none;
+      text-align: center;
+      padding: 20px;
+    }
+
+    .tab-content.active {
+      display: block;
+    }
+
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 30px;
+      margin-top: 30px;
+    }
+
+    .card {
+      background: rgba(255,255,255,0.05);
+      padding: 20px;
+      border-radius: 10px;
+      transition: 0.3s;
+    }
+
+    .card:hover {
+      background: rgba(255,0,255,0.2);
+      transform: scale(1.05);
+    }
+
+    .card h3 {
+      margin-bottom: 15px;
+      color: #00ffff;
+    }
+
+    /* Discord popup */
+    #discord-popup {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background: rgba(0,0,0,0.85);
+      border: 2px solid #00ffff;
+      border-radius: 10px;
+      padding: 15px 20px;
+      z-index: 200;
+      display: flex;
+      align-items: center;
+      animation: fadein 1s;
+    }
+
+    #discord-popup button.close {
+      margin-left: 15px;
+      background: red;
+      color: #fff;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      padding: 5px 10px;
+    }
+
+    @keyframes fadein {
+      from {opacity: 0;}
+      to {opacity: 1;}
+    }
+
+    footer {
+      text-align: center;
+      padding: 30px 0;
+      background: rgba(0,0,0,0.8);
+      color: #fff;
+      margin-top: 50px;
+    }
+  </style>
+</head>
+<body>
+
+  <canvas id="stars"></canvas>
+
+  <header>
+    <h1>Galaxy Hub</h1>
+    <nav>
+      <a class="tab-link" data-tab="games">Games</a>
+      <a class="tab-link" data-tab="entertainment">Entertainment</a>
+      <a class="tab-link" data-tab="community">Community</a>
+      <a class="tab-link" data-tab="tools">Tools</a>
+    </nav>
+  </header>
+
+  <section class="hero">
+    <h2>Welcome to the Galaxy of Fun!</h2>
+    <p>Explore games, entertainment, and cosmic adventures like never before.</p>
+    <a class="btn tab-link" data-tab="games">Start Playing</a>
+  </section>
+
+  <!-- Tab Contents -->
+  <section id="games" class="tab-content active">
+    <h2>🚀 Games</h2>
+    <div class="cards">
+      <div class="card">
+        <h3>Mathlife.org</h3>
+        <p>Challenge your mind with exciting puzzles.</p>
+        <a class="btn" href="https://mathlife.org" target="_blank">Play Now</a>
+      </div>
+      <div class="card">
+        <h3>Space Runner</h3>
+        <p>Dodge asteroids and race through the cosmos!</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="entertainment" class="tab-content">
+    <h2>🎉 Entertainment</h2>
+    <div class="cards">
+      <div class="card">
+        <h3>Jokes & Memes</h3>
+        <p>Laugh with cosmic humor!</p>
+      </div>
+      <div class="card">
+        <h3>Videos</h3>
+        <p>Watch galactic adventures and highlights.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="community" class="tab-content">
+    <h2>🌌 Community</h2>
+    <div class="cards">
+      <div class="card">
+        <h3>Global Chat</h3>
+        <p>Connect instantly with explorers worldwide.</p>
+      </div>
+      <div class="card">
+        <h3>Events</h3>
+        <p>Join tournaments and special cosmic events.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="tools" class="tab-content">
+    <h2>🛠 Tools</h2>
+    <div class="cards">
+      <div class="card">
+        <h3>Cheat Sheets</h3>
+        <p>Quick guides for your favorite games.</p>
+      </div>
+      <div class="card">
+        <h3>Utilities</h3>
+        <p>Handy tools to boost your gaming experience.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Discord Popup -->
+  <div id="discord-popup">
+    <span>Join our Discord community!</span>
+    <a class="btn" href="https://discord.gg/NGqZrJnQ" target="_blank">Join</a>
+    <button class="close" onclick="document.getElementById('discord-popup').style.display='none'">X</button>
+  </div>
+
+  <footer>
+    &copy; 2025 Galaxy Hub | Explore, Play, and Conquer the Cosmos
+  </footer>
+
+  <script>
+    // Tab functionality
+    const tabLinks = document.querySelectorAll('.tab-link');
+    const tabContents = document.querySelectorAll('.tab-content');
+
+    tabLinks.forEach(link => {
+      link.addEventListener('click', () => {
+        tabContents.forEach(content => content.classList.remove('active'));
+        document.getElementById(link.dataset.tab).classList.add('active');
+      });
+    });
+
+    // Starfield animation
+    const canvas = document.getElementById('stars');
+    const ctx = canvas.getContext('2d');
+    let stars = [];
+    const numStars = 200;
+
+    function resizeCanvas() {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    }
+    window.addEventListener('resize', resizeCanvas);
+    resizeCanvas();
+
+    for(let i=0;i<numStars;i++){
+      stars.push({
+        x: Math.random()*canvas.width,
+        y: Math.random()*canvas.height,
+        r: Math.random()*1.5,
+        speed: Math.random()*0.5
+      });
+    }
+
+    function animateStars() {
+      ctx.clearRect(0,0,canvas.width,canvas.height);
+      stars.forEach(s=>{
+        s.y -= s.speed;
+        if(s.y<0) s.y = canvas.height;
+        ctx.beginPath();
+        ctx.arc(s.x,s.y,s.r,0,Math.PI*2);
+        ctx.fillStyle = 'white';
+        ctx.fill();
+      });
+      requestAnimationFrame(animateStars);
+    }
+    animateStars();
+  </script>
+
+</body>
+</html>
